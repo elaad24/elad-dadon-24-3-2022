@@ -1,0 +1,11 @@
+
+
+my api key = UKpjmRddsUSGtOhUGlrZNaSNLe3mTiNe
+
+location number -defult telAviv = 215854
+
+without values = 
+5 day api = http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationNumber}?apikey=${apikey}&metric=true 
+
+with values 
+5 day api = http://dataservice.accuweather.com/forecasts/v1/daily/5day/215854?apikey=UKpjmRddsUSGtOhUGlrZNaSNLe3mTiNe&metric=true 
