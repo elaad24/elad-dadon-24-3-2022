@@ -1,5 +1,11 @@
 import React from "react";
+import WeatherGroup from "./WeatherGroup";
 
 export default function Home({ data }) {
-  return <div className=""></div>;
+  const fiveDaysForcast = data.DailyForecasts;
+  return (
+    <>
+      <WeatherGroup fiveDaysForcast={fiveDaysForcast} />
+    </>
+  );
 }
