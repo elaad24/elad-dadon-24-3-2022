@@ -6,4 +6,5 @@
   height: 98vh;
   width: 99vw;
   display: flex;
+  flex-direction: column;
 }

@@ -24,7 +24,7 @@ export const getDate = (date) => {
   return `${formatedDate} ${formatedMonth}`;
 };
 
-export const getTemp = (tempInMetric, type = "matric") => {
+export const getFahrenheitTemp = (tempInMetric, type = "matric") => {
   if (type == "imparial") {
     const inImparial = Math.round((tempInMetric * 9) / 5 + 32);
     return `${inImparial} ℉ `;
@@ -40,4 +40,12 @@ export const getIconUrl = (iconNumber) => {
     fixedNumber = iconNumber;
   }
   return `https://developer.accuweather.com/sites/default/files/${fixedNumber}-s.png`;
+};
+
+export const getHouers = (dateTime) => {
+  return new Date(dateTime).getHours();
+};
+
+export const getTempFromData = (hourlyWeatherData) => {
+  return hourlyWeatherData.map((item) => item.Temperature.Value);
 };
