@@ -1,14 +1,18 @@
 import React from "react";
+import Chart from "./common/Chart";
 import HomeInfo from "./HomeInfo";
 import WeatherGroup from "./WeatherGroup";
 
-export default function Home({ fiveDaysData, hourWeatherData, location }) {
-  console.log(fiveDaysData);
+import hoursweather from "../toDelete/mockData12hours";
+import fiveDaysweather from "../toDelete/mockData5days";
+
+export default function Home() {
   return (
     <>
-      <div className="column">
-        <HomeInfo hourWeatherData={hourWeatherData} location={location} />
-        <WeatherGroup fiveDaysForcast={fiveDaysData} />
+      <div className="column ">
+        <HomeInfo hourWeatherData={hoursweather} />
+        <Chart hourWeatherData={hoursweather} />
+        <WeatherGroup fiveDaysForcast={fiveDaysweather.DailyForecasts} />
       </div>
     </>
   );

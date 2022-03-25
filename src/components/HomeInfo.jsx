@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getIconUrl, getDay } from "../utils";
-export default function HomeInfo({ hourWeatherData, location }) {
+export default function HomeInfo({ hourWeatherData }) {
   const getTimeFromUnix = (unix) => {
     return (
       new Date(unix * 1000).toLocaleString().split(",")[1].split(":")[0] + ":00"
@@ -9,6 +9,7 @@ export default function HomeInfo({ hourWeatherData, location }) {
 
   const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
 
+  const locationName = currentItem.Link.split("/")[5];
   return (
     <div className="d-flex justify-content-between align-items-center">
       <div className="d-flex align-items-center gap-3">
@@ -37,7 +38,9 @@ export default function HomeInfo({ hourWeatherData, location }) {
       </div>
 
       <div className="column text-end">
-        <div className="fs-3">{location}</div>
+        <div className="fs-3" style={{ textTransform: "capitalize" }}>
+          {locationName}
+        </div>
         <div className=" fs-5 text-muted">
           {getDay(currentItem.EpochDateTime * 1000)}
           {getTimeFromUnix(currentItem.EpochDateTime)}{" "}
