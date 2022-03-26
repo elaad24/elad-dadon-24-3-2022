@@ -7,18 +7,21 @@ export const favouriteSlice = createSlice({
   initialState,
   reducers: {
     addTofavourites: (state, action) => {
-      state = [...state, action.payload];
+      console.log("add to favorit hapend ");
+      console.log(action);
+      return (state = [...state, action.payload]);
     },
 
     removeFromFavourites: (state, action) => {
       let temp = [];
+      console.log("remove from favourits - state,", state);
       for (let item of state) {
         console.log("item", JSON.stringify(item));
-        if (item.Id != action.payload) {
+        if (item.id != action.payload.id) {
           temp.push(item);
         }
       }
-      state = [...temp];
+      return (state = [...temp]);
     },
   },
 });
