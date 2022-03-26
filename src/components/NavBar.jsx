@@ -6,12 +6,15 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
+import SearchBar from "./common/SearchBar";
 
 export default function NavBar() {
   return (
     <div className="d-flex align-items-center justify-content-between my-3 ">
       <h2 className="">Herolo Weather Task</h2>
-      <div className=""></div>
+      <div className="">
+        <SearchBar />
+      </div>
       <div className="d-flex gap-4">
         <Link to="/">
           <button className="btn btn-warning text-white fs-5">Home</button>
