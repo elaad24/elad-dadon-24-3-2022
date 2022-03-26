@@ -18,3 +18,9 @@ export function hourlyForecast(locationID) {
     `${apiUrl}forecasts/v1/hourly/12hour/${locationID}?apikey=${apikey}&details=true&metric=true`
   );
 }
+
+export function autocompleteSearch(text) {
+  return http.get(
+    `${apiUrl}locations/v1/cities/autocomplete?apikey=${apikey}&q=${text}`
+  );
+}
