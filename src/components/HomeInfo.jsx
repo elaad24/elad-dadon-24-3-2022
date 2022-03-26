@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { getIconUrl, getDay } from "../utils";
+import { getIconUrl, getDay, addOrRemoveFromFavorits } from "../utils";
+import bookmark from "../icons/bookmark.png";
+
+import { useSelector, useDispatch } from "react-redux";
+
 export default function HomeInfo({ hourWeatherData }) {
+  const dispatch = useDispatch();
+
+  const Favourites = useSelector((state) => state.Favourites);
+
   const getTimeFromUnix = (unix) => {
     return (
       new Date(unix * 1000).toLocaleString().split(",")[1].split(":")[0] + ":00"
@@ -10,6 +18,7 @@ export default function HomeInfo({ hourWeatherData }) {
   const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
 
   const locationName = currentItem.Link.split("/")[5];
+  const locationId = currentItem.Link.split("/")[6];
   return (
     <div className="d-flex justify-content-between align-items-center">
       <div className="d-flex align-items-center gap-3">
@@ -43,10 +52,26 @@ export default function HomeInfo({ hourWeatherData }) {
         </div>
         <div className=" fs-5 text-muted">
           {getDay(currentItem.EpochDateTime * 1000)}
-          {getTimeFromUnix(currentItem.EpochDateTime)}{" "}
+          {getTimeFromUnix(currentItem.EpochDateTime)}
         </div>
         <div className="fs-5 text-muted">
-          {currentItem.IconPhrase} , {currentItem.RealFeelTemperature.Phrase}{" "}
+          {currentItem.IconPhrase} , {currentItem.RealFeelTemperature.Phrase}
+        </div>
+        <div className="fs-5 text-muted">
+          <button
+            className="btn fs-5 text-muted"
+            onClick={() =>
+              addOrRemoveFromFavorits({
+                id: locationId,
+                name: locationName,
+                FavoritsFromRedux: Favourites,
+                dispatchFunction: dispatch,
+              })
+            }
+          >
+            add to favorits -
+            <img src={bookmark} alt="" width={"40px"} />
+          </button>
         </div>
       </div>
     </div>
