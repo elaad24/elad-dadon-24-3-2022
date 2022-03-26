@@ -1,3 +1,9 @@
+import { oneDayForecast } from "./services/appService";
+import {
+  addTofavourites,
+  removeFromFavourites,
+} from "./redux/slices/favouriteSlice";
+
 export const getDay = (date, type) => {
   const weekDays = [
     "Sunday",
@@ -11,7 +17,7 @@ export const getDay = (date, type) => {
   const weekDaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const day = new Date(date).getDay();
-  if (type == "short") {
+  if (type === "short") {
     return weekDaysShort[day];
   } else {
     return weekDays[day];
@@ -25,7 +31,7 @@ export const getDate = (date) => {
 };
 
 export const getFahrenheitTemp = (tempInMetric, type = "matric") => {
-  if (type == "imparial") {
+  if (type === "imparial") {
     const inImparial = Math.round((tempInMetric * 9) / 5 + 32);
     return `${inImparial} ℉ `;
   }
@@ -48,4 +54,39 @@ export const getHouers = (dateTime) => {
 
 export const getTempFromData = (hourlyWeatherData) => {
   return hourlyWeatherData.map((item) => item.Temperature.Value);
+};
+
+export const addOrRemoveFromFavorits = async ({
+  id,
+  name,
+  FavoritsFromRedux,
+  dispatchFunction,
+}) => {
+  console.log("addOrRemoveFromFavorits run");
+  console.log(
+    "id name FavoritsFromRedux dispatchFunction- ",
+    id,
+    name,
+    FavoritsFromRedux,
+    dispatchFunction
+  );
+  if (FavoritsFromRedux.length === 0) {
+    console.log("Favourites is empty ");
+
+    const { data } = await oneDayForecast(id);
+    const onedayWeater = data;
+    console.log("data", onedayWeater);
+    console.log("dispatched");
+    dispatchFunction(addTofavourites({ id, name, onedayWeater }));
+  } else if (FavoritsFromRedux.length !== 0) {
+    console.log("Favourites is not  empty ");
+    const itemIFavourites = FavoritsFromRedux.filter((item) => item.id === id);
+    if (itemIFavourites) {
+      dispatchFunction(removeFromFavourites({ id }));
+    } else if (!itemIFavourites) {
+      const { data } = oneDayForecast(id);
+      const onedayWeater = data;
+      dispatchFunction(addTofavourites({ id, name, onedayWeater }));
+    }
+  }
 };
