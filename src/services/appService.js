@@ -1,5 +1,5 @@
 import http from "./http";
-import { apiUrl } from "../config.json";
+import apiUrl from "../config.json";
 const apikey = "UKpjmRddsUSGtOhUGlrZNaSNLe3mTiNe";
 
 export function oneDayForecast(locationID) {
