@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { autocompleteSearch } from "../../services/appService";
 
-import searchedData from "../../toDelete/mockDataSearchedLocaion";
-
+/* import searchedData from "../../toDelete/mockDataSearchedLocaion";
+ */
 export default function SearchBar() {
   const [searchedTxt, setSearchedTxt] = useState("");
   const [searchedValues, setSearchedValues] = useState([]);
@@ -50,7 +50,15 @@ export default function SearchBar() {
           onChange={(e) => searchFunction(e.target.value)}
           list={"searchBar"}
         />
-        <button className="btn btn-outline-success" type="submit">
+        <button
+          className="btn btn-outline-success"
+          type="button"
+          onClick={() =>
+            console.log(
+              `chose- ${searchedValues[0].LocalizedName}, id- ${searchedValues[0].Key}`
+            )
+          }
+        >
           Search
         </button>
       </form>
@@ -59,6 +67,9 @@ export default function SearchBar() {
           <option
             value={`${item.LocalizedName} - ${item.Country.LocalizedName}`}
             key={item.Key}
+            onClick={() =>
+              console.log(`chose- ${item.LocalizedName}, id- ${item.Key}`)
+            }
           ></option>
         ))}
       </datalist>
