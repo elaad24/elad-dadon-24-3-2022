@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { autocompleteSearch } from "../../services/appService";
 
 /* import searchedData from "../../toDelete/mockDataSearchedLocaion";
@@ -14,6 +15,7 @@ export default function SearchBar() {
   const searchLocation = async (txt) => {
     console.log(txt);
     const { data } = await autocompleteSearch(txt);
+    console.log(data);
     setSearchedValues([...data]);
     // ?  dispach action and data to redux
     setrequest(request + 1);
@@ -49,27 +51,37 @@ export default function SearchBar() {
           aria-label="Search"
           onChange={(e) => searchFunction(e.target.value)}
           list={"searchBar"}
+          onBlur={(e) => (e.target.value = "")}
         />
-        <button
-          className="btn btn-outline-success"
-          type="button"
-          onClick={() =>
-            console.log(
-              `chose- ${searchedValues[0].LocalizedName}, id- ${searchedValues[0].Key}`
-            )
-          }
-        >
-          Search
-        </button>
+        <Link to={`/location/${searchedValues[0]?.Key}`}>
+          <button
+            className="btn btn-outline-success "
+            type="button"
+            onClick={() =>
+              console.log(
+                `chose- ${searchedValues[0].LocalizedName}, id- ${searchedValues[0].Key}`
+              )
+            }
+          >
+            Search
+          </button>
+        </Link>
       </form>
-      <datalist id="searchBar">
+      <datalist
+        id="searchBar"
+        onSelect={(e) => console.log("select")}
+        onInput={(e) => console.log("input")}
+        onChange={(e) => console.log("change")}
+        onClick={(e) => console.log("clicked")}
+      >
         {searchedValues.map((item) => (
           <option
             value={`${item.LocalizedName} - ${item.Country.LocalizedName}`}
             key={item.Key}
-            onClick={() =>
-              console.log(`chose- ${item.LocalizedName}, id- ${item.Key}`)
-            }
+            onSelect={(e) => console.log("select")}
+            onInput={(e) => console.log("input")}
+            onChange={(e) => console.log("change")}
+            onClick={(e) => console.log("clicked")}
           ></option>
         ))}
       </datalist>
