@@ -80,7 +80,7 @@ export const addOrRemoveFromFavorits = async ({
     dispatchFunction(addTofavourites({ id, name, onedayWeater }));
   } else if (FavoritsFromRedux.length !== 0) {
     console.log("Favourites is not  empty ");
-    const itemIFavourites = FavoritsFromRedux.filter((item) => item.id === id);
+    const itemIFavourites = FavoritsFromRedux.filter((IDs) => IDs === id);
     if (itemIFavourites) {
       dispatchFunction(removeFromFavourites({ id }));
     } else if (!itemIFavourites) {
@@ -89,4 +89,10 @@ export const addOrRemoveFromFavorits = async ({
       dispatchFunction(addTofavourites({ id, name, onedayWeater }));
     }
   }
+};
+
+export const getTimeFromUnix = (unix) => {
+  return (
+    new Date(unix * 1000).toLocaleString().split(",")[1].split(":")[0] + ":00"
+  );
 };

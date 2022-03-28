@@ -15,11 +15,11 @@ export default function Favourite() {
 
   const Favourites = useSelector((state) => state.Favourites);
   console.log(Favourites);
-  const favouritesNotEmpty = Favourites?.length > 0;
-  console.log(favouritesNotEmpty);
+  const favouritesNotEmpty = Favourites.likedIds?.length > 0;
+  console.log("favouritesNotEmpty");
 
   return favouritesNotEmpty ? (
-    Favourites?.map((item) => (
+    Favourites.likedItems?.map((item) => (
       <WeatherCard
         item={item?.onedayWeater.DailyForecasts[0]}
         redirectBtn={true}

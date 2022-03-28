@@ -51,7 +51,7 @@ export default function SearchBar() {
           aria-label="Search"
           onChange={(e) => searchFunction(e.target.value)}
           list={"searchBar"}
-          onBlur={(e) => (e.target.value = "")}
+          // onBlur={(e) => (e.target.value = "")}
         />
         <Link to={`/location/${searchedValues[0]?.Key}`}>
           <button
@@ -67,21 +67,11 @@ export default function SearchBar() {
           </button>
         </Link>
       </form>
-      <datalist
-        id="searchBar"
-        onSelect={(e) => console.log("select")}
-        onInput={(e) => console.log("input")}
-        onChange={(e) => console.log("change")}
-        onClick={(e) => console.log("clicked")}
-      >
+      <datalist id="searchBar">
         {searchedValues.map((item) => (
           <option
             value={`${item.LocalizedName} - ${item.Country.LocalizedName}`}
             key={item.Key}
-            onSelect={(e) => console.log("select")}
-            onInput={(e) => console.log("input")}
-            onChange={(e) => console.log("change")}
-            onClick={(e) => console.log("clicked")}
           ></option>
         ))}
       </datalist>

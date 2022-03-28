@@ -9,11 +9,19 @@ import {
 } from "react-router-dom";
 
 export default function weatherCard({ item, redirectBtn = false }) {
+  const locaitionName = item.Link.split("/")[5];
   const locataionId = item.Link.split("/")[6];
   return (
     <Card style={{ width: "14.5rem" }}>
       <Card.Body className="text-center">
         <Card.Title>
+          {redirectBtn && (
+            <>
+              <div className="fs-4">
+                <b>{locaitionName}</b>
+              </div>
+            </>
+          )}
           {getDay(item.Date)} ,{getDate(item.Date)}
         </Card.Title>
         <Card.Subtitle className="my-3  ">

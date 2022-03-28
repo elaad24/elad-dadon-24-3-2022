@@ -1,26 +1,77 @@
-import React, { useState } from "react";
-import { getIconUrl, getDay, addOrRemoveFromFavorits } from "../utils";
+import React, { useState, useEffect } from "react";
+import {
+  getIconUrl,
+  getDay,
+  addOrRemoveFromFavorits,
+  getTimeFromUnix,
+} from "../utils";
 import bookmark from "../icons/bookmark.png";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function HomeInfo({ hourWeatherData }) {
   const dispatch = useDispatch();
-
+  const [liked, setLiked] = useState(false);
   const Favourites = useSelector((state) => state.Favourites);
-
-  const getTimeFromUnix = (unix) => {
-    return (
-      new Date(unix * 1000).toLocaleString().split(",")[1].split(":")[0] + ":00"
-    );
-  };
-
   const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
 
   const locationName = currentItem.Link.split("/")[5];
   const locationId = currentItem.Link.split("/")[6];
+
+  console.log(Favourites.likedIds);
+
+  useEffect(() => {
+    if (Favourites.likedIds.includes(locationId)) {
+      setLiked(true);
+    }
+  }, [Favourites.likedIds]);
+
+  const likeCombo = () => {
+    addOrRemoveFromFavorits({
+      id: locationId,
+      name: locationName,
+      FavoritsFromRedux: Favourites.likedIds,
+      dispatchFunction: dispatch,
+    });
+
+    if (liked) {
+      setLiked(false);
+      toast.error("removed from favorites !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast("add to favorites !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   return (
     <div className="d-flex justify-content-between align-items-center">
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="d-flex align-items-center gap-3">
         <img src={getIconUrl(currentItem.WeatherIcon)} width="300px" />
         <h1>
@@ -58,17 +109,7 @@ export default function HomeInfo({ hourWeatherData }) {
           {currentItem.IconPhrase} , {currentItem.RealFeelTemperature.Phrase}
         </div>
         <div className="fs-5 text-muted">
-          <button
-            className="btn fs-5 text-muted"
-            onClick={() =>
-              addOrRemoveFromFavorits({
-                id: locationId,
-                name: locationName,
-                FavoritsFromRedux: Favourites,
-                dispatchFunction: dispatch,
-              })
-            }
-          >
+          <button className="btn fs-5 text-muted" onClick={() => likeCombo()}>
             add to favorits -
             <img src={bookmark} alt="" width={"40px"} />
           </button>
@@ -77,27 +118,3 @@ export default function HomeInfo({ hourWeatherData }) {
     </div>
   );
 }
-
-/*  <div className="w-25">
-          <div>
-            {" "}
-            date-time:{getTimeFromUnix(item.EpochDateTime)}{" "}
-            {getDay(item.EpochDateTime * 1000)}
-          </div>
-          <div className="">uv index - {item.UVIndexText}</div>
-          <div className="">wind speed - {item.Wind.Speed.Value} km/h </div>
-          <div>
-            {" "}
-            icon:{" "}
-            <img
-              src={getIconUrl(item.WeatherIcon)}
-              width="150px"
-              height="90px"
-              alt=""
-            />
-          </div>
-          <div>
-            temp:{item.Temperature.Value} {item.Temperature.Unit}
-          </div>
-          <div> description {item.IconPhrase}</div>
-        </div> */
