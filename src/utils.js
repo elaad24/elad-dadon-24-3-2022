@@ -30,12 +30,20 @@ export const getDate = (date) => {
   return `${formatedDate} ${formatedMonth}`;
 };
 
-export const getFahrenheitTemp = (tempInMetric, type = "matric") => {
-  if (type === "imparial") {
+export const getFahrenheitTemp = (tempInMetric, matric = true) => {
+  if (matric === false) {
     const inImparial = Math.round((tempInMetric * 9) / 5 + 32);
     return `${inImparial} ℉ `;
   }
   return `${tempInMetric} ℃ `;
+};
+
+export const getFahrenheitValue = (tempInMetric, matric = true) => {
+  if (matric === false) {
+    const inImparial = Math.round((tempInMetric * 9) / 5 + 32);
+    return `${inImparial}`;
+  }
+  return `${tempInMetric}`;
 };
 
 export const getIconUrl = (iconNumber) => {
@@ -52,8 +60,10 @@ export const getHouers = (dateTime) => {
   return new Date(dateTime).getHours();
 };
 
-export const getTempFromData = (hourlyWeatherData) => {
-  return hourlyWeatherData.map((item) => item.Temperature.Value);
+export const getTempFromData = (hourlyWeatherData, matricUnits) => {
+  return hourlyWeatherData.map((item) =>
+    getFahrenheitValue(item.Temperature.Value, matricUnits)
+  );
 };
 
 export const addOrRemoveFromFavorits = async ({
