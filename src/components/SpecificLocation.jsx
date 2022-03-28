@@ -5,9 +5,11 @@ import WeatherGroup from "./WeatherGroup";
 import { useParams } from "react-router-dom";
 import { fiveDaysForecast, hourlyForecast } from "../services/appService";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
   const { id } = useParams();
+  const isMetric = useSelector((state) => state.Settings.metricUnits);
 
   console.log(id);
   const [hourlyWeather, setHourlyWeather] = useState(null);
@@ -28,8 +30,8 @@ export default function Home() {
     <>
       {hourlyWeather && fiveDayWeather ? (
         <div className="column ">
-          <HomeInfo hourWeatherData={hourlyWeather} />
-          <Chart hourWeatherData={hourlyWeather} />
+          <HomeInfo hourWeatherData={hourlyWeather} matricUnits={isMetric} />
+          <Chart hourWeatherData={hourlyWeather} matricUnits={isMetric} />
           <WeatherGroup fiveDaysForcast={fiveDayWeather?.DailyForecasts} />
         </div>
       ) : (

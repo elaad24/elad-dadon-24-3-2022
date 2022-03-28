@@ -4,13 +4,14 @@ import {
   getDay,
   addOrRemoveFromFavorits,
   getTimeFromUnix,
+  getFahrenheitValue,
 } from "../utils";
 import bookmark from "../icons/bookmark.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function HomeInfo({ hourWeatherData }) {
+export default function HomeInfo({ hourWeatherData, matricUnits }) {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const Favourites = useSelector((state) => state.Favourites);
@@ -75,9 +76,9 @@ export default function HomeInfo({ hourWeatherData }) {
       <div className="d-flex align-items-center gap-3">
         <img src={getIconUrl(currentItem.WeatherIcon)} width="300px" />
         <h1>
-          {currentItem.Temperature.Value}
+          {getFahrenheitValue(currentItem.Temperature.Value, matricUnits)}
           <span className="text-muted fs-2">
-            {currentItem.Temperature.Unit}
+            {matricUnits ? currentItem.Temperature.Unit : "F"}
           </span>
         </h1>
         <div className="column">

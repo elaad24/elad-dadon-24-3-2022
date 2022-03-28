@@ -13,14 +13,11 @@ export default function SettingsDiv() {
   const [isDarkMode, setIsDarkMode] = useState(inDarkMood);
   const [unitType, setUnitType] = useState("C");
 
-  console.log("isDarkMode", isDarkMode);
-  console.log("unitType", unitType);
-
   const changeLightMode = () => {
     setIsDarkMode(!inDarkMood);
     dispatch(changeMode());
 
-    const prompt = isDarkMode ? "On" : "Off";
+    const prompt = !isDarkMode ? "On" : "Off";
 
     toast.success(`Dark Mode ${prompt} !`, {
       position: "top-right",

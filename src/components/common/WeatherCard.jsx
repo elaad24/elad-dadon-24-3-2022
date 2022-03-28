@@ -1,3 +1,4 @@
+import React from "react";
 import Card from "react-bootstrap/Card";
 import { getDate, getDay, getIconUrl, getFahrenheitTemp } from "../../utils";
 import {
@@ -8,9 +9,10 @@ import {
   Navigate,
 } from "react-router-dom";
 
-export default function weatherCard({ item, redirectBtn = false }) {
+export default function weatherCard({ item, redirectBtn = false, matricUnit }) {
   const locaitionName = item.Link.split("/")[5];
   const locataionId = item.Link.split("/")[6];
+
   return (
     <Card style={{ width: "14.5rem" }}>
       <Card.Body className="text-center">
@@ -36,9 +38,14 @@ export default function weatherCard({ item, redirectBtn = false }) {
           <div className="mb-2 fs-5">{item.Day.IconPhrase}</div>
           <div className="d-flex justify-content-around text-muted ">
             <div>
-              <b>{getFahrenheitTemp(item.Temperature.Maximum.Value)}</b>
+              <b>
+                {getFahrenheitTemp(item.Temperature.Maximum.Value, matricUnit)}
+              </b>
             </div>
-            <div> {getFahrenheitTemp(item.Temperature.Minimum.Value)}</div>
+            <div>
+              {" "}
+              {getFahrenheitTemp(item.Temperature.Minimum.Value, matricUnit)}
+            </div>
           </div>
         </Card.Text>
         {redirectBtn && (

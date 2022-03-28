@@ -23,12 +23,12 @@ ChartJS.register(
   Legend
 );
 
-export default function Chart({ hourWeatherData }) {
+export default function Chart({ hourWeatherData, matricUnits }) {
   const houers = hourWeatherData.map(
     (item) => `${getHouers(item.DateTime)}:00`
   );
 
-  const tempacherList = getTempFromData(hourWeatherData);
+  const tempacherList = getTempFromData(hourWeatherData, matricUnits);
 
   const options = {
     responsive: true,

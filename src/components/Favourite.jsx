@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Favourite() {
   const Favourites = useSelector((state) => state.Favourites);
+  const isMetric = useSelector((state) => state.Settings.metricUnits);
+
   console.log(Favourites);
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
   console.log(favouritesNotEmpty ? "favouritesNotEmpty" : "favouritesIsEmpty");
@@ -16,6 +18,7 @@ export default function Favourite() {
       <WeatherCard
         item={item?.onedayWeater.DailyForecasts[0]}
         redirectBtn={true}
+        matricUnit={isMetric}
       />
     ))
   ) : (
