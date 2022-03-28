@@ -6,17 +6,10 @@ import NoFavourits from "./common/NoFavourits";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Favourite() {
-  // need to get for this component the id's of the favorits and then do function that get the data of this location by the id
-  // and itarat this data
-
-  // id's -> function get_weather_by_id -> save in state and redux -> itatrat it
-  // return data.map((item) => <WeatherCard item={item} />);
-  //   console.log(data);
-
   const Favourites = useSelector((state) => state.Favourites);
   console.log(Favourites);
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
-  console.log("favouritesNotEmpty");
+  console.log(favouritesNotEmpty ? "favouritesNotEmpty" : "favouritesIsEmpty");
 
   return favouritesNotEmpty ? (
     Favourites.likedItems?.map((item) => (
