@@ -14,10 +14,18 @@ import {
 } from "react-router-dom";
 
 import Favourite from "./components/Favourite";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const inDarkMood = useSelector((state) => state.Settings.darkMode);
   return (
-    <div className="app container d-flex">
+    <div
+      className={
+        inDarkMood
+          ? "app container d-flex bg-dark text-light"
+          : "app container d-flex"
+      }
+    >
       <NavBar />
       <div>
         <Routes>

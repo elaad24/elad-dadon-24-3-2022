@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function Favourite() {
   const Favourites = useSelector((state) => state.Favourites);
   const isMetric = useSelector((state) => state.Settings.metricUnits);
+  const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
   console.log(Favourites);
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
@@ -19,6 +20,7 @@ export default function Favourite() {
         item={item?.onedayWeater.DailyForecasts[0]}
         redirectBtn={true}
         matricUnit={isMetric}
+        darkMode={inDarkMood}
       />
     ))
   ) : (

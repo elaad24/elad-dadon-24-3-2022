@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { autocompleteSearch } from "../../services/appService";
+import { useSelector, useDispatch } from "react-redux";
 
 /* import searchedData from "../../toDelete/mockDataSearchedLocaion";
  */
 export default function SearchBar() {
+  const inDarkMood = useSelector((state) => state.Settings.darkMode);
+
   const [searchedTxt, setSearchedTxt] = useState("");
   const [searchedValues, setSearchedValues] = useState([]);
   const [inTimeOut, setInTimeOut] = useState(false);
@@ -45,7 +48,11 @@ export default function SearchBar() {
     <div>
       <form className="d-flex">
         <input
-          className="form-control me-2"
+          className={
+            inDarkMood
+              ? "form-control me-2 bg-dark text-light"
+              : "form-control me-2"
+          }
           type="search"
           placeholder="Search location"
           aria-label="Search"
@@ -55,7 +62,9 @@ export default function SearchBar() {
         />
         <Link to={`/location/${searchedValues[0]?.Key}`}>
           <button
-            className="btn btn-outline-success "
+            className={
+              inDarkMood ? "btn btn-success " : "btn btn-outline-success"
+            }
             type="button"
             onClick={() =>
               console.log(

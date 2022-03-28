@@ -15,6 +15,7 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const Favourites = useSelector((state) => state.Favourites);
+
   const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
 
   const locationName = currentItem.Link.split("/")[5];

@@ -66,7 +66,9 @@ export default function SettingsDiv() {
         style={{ fontSize: "50px" }}
         onClick={changeUnits}
       >
-        <span>{unitType}&#xb0;</span>
+        <span className={isDarkMode ? "text-light" : "text-dark"}>
+          {unitType}&#xb0;
+        </span>
       </button>
     </div>
   );

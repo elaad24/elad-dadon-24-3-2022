@@ -9,18 +9,26 @@ import {
   Navigate,
 } from "react-router-dom";
 
-export default function weatherCard({ item, redirectBtn = false, matricUnit }) {
+export default function weatherCard({
+  item,
+  redirectBtn = false,
+  matricUnit,
+  darkMode,
+}) {
   const locaitionName = item.Link.split("/")[5];
   const locataionId = item.Link.split("/")[6];
 
   return (
-    <Card style={{ width: "14.5rem" }}>
+    <Card
+      className={darkMode ? "bg-dark border" : ""}
+      style={{ width: "14.5rem" }}
+    >
       <Card.Body className="text-center">
         <Card.Title>
           {redirectBtn && (
             <>
               <div className="fs-4">
-                <b>{locaitionName}</b>
+                <b style={{ textTransform: "capitalize" }}>{locaitionName}</b>
               </div>
             </>
           )}

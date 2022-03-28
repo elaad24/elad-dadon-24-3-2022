@@ -17,7 +17,7 @@ export const settingsSlice = createSlice({
     },
     changeTempUnits: (state) => {
       return (state = {
-        darkMode: !state.darkMode,
+        darkMode: state.darkMode,
         metricUnits: !state.metricUnits,
       });
     },

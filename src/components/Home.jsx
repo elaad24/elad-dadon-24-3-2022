@@ -9,10 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
   const isMetric = useSelector((state) => state.Settings.metricUnits);
+  const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
   return (
     <>
-      <div className="column ">
+      <div className={inDarkMood ? "column bg-dark text-light" : "column "}>
         <HomeInfo hourWeatherData={hoursweather} matricUnits={isMetric} />
         <Chart hourWeatherData={hoursweather} matricUnits={isMetric} />
         <WeatherGroup fiveDaysForcast={fiveDaysweather.DailyForecasts} />
