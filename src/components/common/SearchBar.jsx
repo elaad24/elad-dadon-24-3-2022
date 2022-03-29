@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { autocompleteSearch } from "../../services/appService";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "../../css/searchBar.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function SearchBar() {
@@ -14,25 +14,18 @@ export default function SearchBar() {
   const [inTimeOut, setInTimeOut] = useState(false);
   const [request, setrequest] = useState(0);
 
-  //console.log(searchedData);
-
   const searchLocation = async (txt) => {
-    console.log(txt);
-
     if (txt.length > 5) {
       const inSearched = searchedValues.filter(
-        (item) => item.LocalizedName == txt.split(" ")[0]
+        (item) => item.LocalizedName === txt.split(" ")[0]
       );
       txt = inSearched[0].Key;
     }
     try {
       const { data } = await autocompleteSearch(txt);
-      console.log(data);
       setSearchedValues([...data]);
     } catch (e) {
-      console.dir(e.response.status);
-      console.log();
-      if (e.response.status == 400) {
+      if (e.response.status === 400) {
         toast.error("error - bad request ", {
           position: "top-right",
           autoClose: 5000,
@@ -56,7 +49,6 @@ export default function SearchBar() {
     }
 
     setrequest(request + 1);
-    console.log(request);
   };
 
   const delaySearch = (txt) => {
@@ -69,7 +61,7 @@ export default function SearchBar() {
 
   const searchFunction = (txt) => {
     setSearchedTxt(txt);
-    if (txt.length == 1) {
+    if (txt.length === 1) {
       searchLocation(txt);
     } else if (txt.length > 1) {
       if (!inTimeOut) {
@@ -100,11 +92,6 @@ export default function SearchBar() {
               inDarkMood ? "btn btn-success " : "btn btn-outline-success"
             }
             type="button"
-            onClick={() =>
-              console.log(
-                `chose- ${searchedValues[0].LocalizedName}, id- ${searchedValues[0].Key}`
-              )
-            }
           >
             Search
           </button>

@@ -19,11 +19,8 @@ export default function Home() {
   useEffect(async () => {
     try {
       const { data } = await hourlyForecast(215854);
-      console.log(data);
       setHourlyWeather(data);
     } catch (e) {
-      console.dir(e.response.status);
-      console.log();
       if (e.response.status == 400) {
         toast.error("error - bad request ", {
           position: "top-right",
@@ -53,8 +50,6 @@ export default function Home() {
       const { data } = await fiveDaysForecast(215854);
       setFiveDayWeather(data);
     } catch (e) {
-      console.dir(e.response.status);
-      console.log();
       if (e.response.status == 400) {
         toast.error("error - bad request ", {
           position: "top-right",

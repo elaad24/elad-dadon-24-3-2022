@@ -72,24 +72,12 @@ export const addOrRemoveFromFavorits = async ({
   FavoritsFromRedux,
   dispatchFunction,
 }) => {
-  console.log("addOrRemoveFromFavorits run");
-  console.log(
-    "id name FavoritsFromRedux dispatchFunction- ",
-    id,
-    name,
-    FavoritsFromRedux,
-    dispatchFunction
-  );
   if (FavoritsFromRedux.length === 0) {
-    console.log("Favourites is empty ");
-
     const { data } = await oneDayForecast(id);
     const onedayWeater = data;
-    console.log("data", onedayWeater);
-    console.log("dispatched");
+
     dispatchFunction(addTofavourites({ id, name, onedayWeater }));
   } else if (FavoritsFromRedux.length !== 0) {
-    console.log("Favourites is not  empty ");
     const itemIFavourites = FavoritsFromRedux.filter((IDs) => IDs === id);
     if (itemIFavourites) {
       dispatchFunction(removeFromFavourites({ id }));

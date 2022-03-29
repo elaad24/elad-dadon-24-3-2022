@@ -12,7 +12,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { getHouers, getTempFromData } from "../../utils";
 import "../../css/chart.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,

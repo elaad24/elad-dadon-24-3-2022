@@ -1,6 +1,6 @@
 import React from "react";
 import WeatherCard from "./common/WeatherCard";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "../css/weatherGroup.css";
 export default function WeatherGroup({ fiveDaysForcast }) {
   const isMetric = useSelector((state) => state.Settings.metricUnits);

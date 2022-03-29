@@ -22,8 +22,6 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
   const locationName = currentItem.Link.split("/")[5];
   const locationId = currentItem.Link.split("/")[6];
 
-  console.log(Favourites.likedIds);
-
   useEffect(() => {
     if (Favourites.likedIds.includes(locationId)) {
       setLiked(true);

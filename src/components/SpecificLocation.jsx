@@ -5,7 +5,7 @@ import WeatherGroup from "./WeatherGroup";
 import { useParams } from "react-router-dom";
 import { fiveDaysForecast, hourlyForecast } from "../services/appService";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,19 +13,15 @@ export default function Home() {
   const { id } = useParams();
   const isMetric = useSelector((state) => state.Settings.metricUnits);
 
-  console.log(id);
   const [hourlyWeather, setHourlyWeather] = useState(null);
   const [fiveDayWeather, setFiveDayWeather] = useState(null);
 
   useEffect(async () => {
     try {
       const { data } = await hourlyForecast(id);
-      console.log(data);
       setHourlyWeather(data);
     } catch (e) {
-      console.dir(e.response.status);
-      console.log();
-      if (e.response.status == 400) {
+      if (e.response.status === 400) {
         toast.error("error - bad request ", {
           position: "top-right",
           autoClose: 5000,
@@ -54,8 +50,6 @@ export default function Home() {
       const { data } = await fiveDaysForecast(id);
       setFiveDayWeather(data);
     } catch (e) {
-      console.dir(e.response.status);
-      console.log();
       if (e.response.status == 400) {
         toast.error("error - bad request ", {
           position: "top-right",

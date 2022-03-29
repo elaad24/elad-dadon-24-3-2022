@@ -10,9 +10,7 @@ export default function Favourite() {
   const isMetric = useSelector((state) => state.Settings.metricUnits);
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
-  console.log(Favourites);
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
-  console.log(favouritesNotEmpty ? "favouritesNotEmpty" : "favouritesIsEmpty");
 
   return favouritesNotEmpty ? (
     Favourites.likedItems?.map((item) => (

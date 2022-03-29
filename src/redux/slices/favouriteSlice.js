@@ -10,8 +10,6 @@ export const favouriteSlice = createSlice({
   initialState,
   reducers: {
     addTofavourites: (state, action) => {
-      console.log("add to favorit hapend ");
-      console.log(action);
       return (state = {
         likedIds: [...state.likedIds, action.payload.id],
         likedItems: [...state.likedItems, action.payload],
@@ -21,18 +19,13 @@ export const favouriteSlice = createSlice({
     removeFromFavourites: (state, action) => {
       let temp = [];
       let temp2 = [];
-      console.log("remove from favourits - state,", state);
       for (let item of state.likedItems) {
-        console.log("item", JSON.stringify(item));
-        if (item.id != action.payload.id) {
+        if (item.id !== action.payload.id) {
           temp.push(item);
         }
       }
-      temp2 = state.likedIds.filter((ID) => ID != action.payload.id);
-      console.log("state in redux after remove,", {
-        likedIds: [...temp2],
-        likedItems: [...temp],
-      });
+      temp2 = state.likedIds.filter((ID) => ID !== action.payload.id);
+
       return (state = {
         likedIds: [...temp2],
         likedItems: [...temp],
