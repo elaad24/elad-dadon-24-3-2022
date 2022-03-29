@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { fiveDaysForecast, hourlyForecast } from "../services/appService";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const { id } = useParams();
@@ -16,18 +18,81 @@ export default function Home() {
   const [fiveDayWeather, setFiveDayWeather] = useState(null);
 
   useEffect(async () => {
-    const { data } = await hourlyForecast(id);
-    console.log(data);
-    setHourlyWeather(data);
+    try {
+      const { data } = await hourlyForecast(id);
+      console.log(data);
+      setHourlyWeather(data);
+    } catch (e) {
+      console.dir(e.response.status);
+      console.log();
+      if (e.response.status == 400) {
+        toast.error("error - bad request ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (e.response.status > 210) {
+        toast.warn("ererror - most probably run out of api credit ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
   }, []);
 
   useEffect(async () => {
-    const { data } = await fiveDaysForecast(id);
-    setFiveDayWeather(data);
+    try {
+      const { data } = await fiveDaysForecast(id);
+      setFiveDayWeather(data);
+    } catch (e) {
+      console.dir(e.response.status);
+      console.log();
+      if (e.response.status == 400) {
+        toast.error("error - bad request ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (e.response.status > 210) {
+        toast.warn("ererror - most probably run out of api credit ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
   }, []);
 
   return (
     <>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {hourlyWeather && fiveDayWeather ? (
         <div className="column ">
           <HomeInfo hourWeatherData={hourlyWeather} matricUnits={isMetric} />

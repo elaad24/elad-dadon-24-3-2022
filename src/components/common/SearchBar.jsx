@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { autocompleteSearch } from "../../services/appService";
 import { useSelector, useDispatch } from "react-redux";
 import "../../css/searchBar.css";
-/* import searchedData from "../../toDelete/mockDataSearchedLocaion";
- */
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function SearchBar() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
@@ -17,10 +18,11 @@ export default function SearchBar() {
 
   const searchLocation = async (txt) => {
     console.log(txt);
+
     const { data } = await autocompleteSearch(txt);
     console.log(data);
     setSearchedValues([...data]);
-    // ?  dispach action and data to redux
+
     setrequest(request + 1);
     console.log(request);
   };
