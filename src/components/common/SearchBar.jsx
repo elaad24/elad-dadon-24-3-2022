@@ -19,9 +19,41 @@ export default function SearchBar() {
   const searchLocation = async (txt) => {
     console.log(txt);
 
-    const { data } = await autocompleteSearch(txt);
-    console.log(data);
-    setSearchedValues([...data]);
+    if (txt.length > 5) {
+      const inSearched = searchedValues.filter(
+        (item) => item.LocalizedName == txt.split(" ")[0]
+      );
+      txt = inSearched[0].Key;
+    }
+    try {
+      const { data } = await autocompleteSearch(txt);
+      console.log(data);
+      setSearchedValues([...data]);
+    } catch (e) {
+      console.dir(e.response.status);
+      console.log();
+      if (e.response.status == 400) {
+        toast.error("error - bad request ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else if (e.response.status > 210) {
+        toast.warn("error - most probably run out of api credit ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    }
 
     setrequest(request + 1);
     console.log(request);
