@@ -10,6 +10,7 @@ import bookmark from "../icons/bookmark.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
+import "../css/home.css";
 
 export default function HomeInfo({ hourWeatherData, matricUnits }) {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
   };
 
   return (
-    <div className="d-flex justify-content-between align-items-center">
+    <div className="homeInfo">
       <ToastContainer
         position="bottom-left"
         autoClose={5000}
@@ -74,38 +75,49 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
         draggable
         pauseOnHover
       />
-      <div className="d-flex align-items-center gap-3">
-        <img src={getIconUrl(currentItem.WeatherIcon)} width="300px" />
-        <h1>
-          {getFahrenheitValue(currentItem.Temperature.Value, matricUnits)}
-          <span className="text-muted fs-2">
-            {matricUnits ? currentItem.Temperature.Unit : "F"}
-          </span>
-        </h1>
-        <div className="column">
-          <div className="fs-5 text-muted">
-            {" "}
-            uv index: {currentItem.UVIndexText}
+      <div className="homeInfoPart1">
+        <div className="iconDiv">
+          <img
+            className="weatherIcon"
+            src={getIconUrl(currentItem.WeatherIcon)}
+          />
+          <h1>
+            {getFahrenheitValue(currentItem.Temperature.Value, matricUnits)}
+            <span className="text-muted fs-2">
+              {matricUnits ? currentItem.Temperature.Unit : "F"}
+            </span>
+          </h1>
+        </div>
+        <div className="homeInfoPart1Spec">
+          <div className="">
+            <div className=" text-muted">
+              wind: {currentItem.Wind.Speed.Value} km/h
+            </div>
+            <div className="text-muted">
+              rain: {currentItem.RainProbability}%
+            </div>
           </div>
-          <div className="fs-5 text-muted">
-            wind: {currentItem.Wind.Speed.Value} km/h
-          </div>
-          <div className="fs-5 text-muted">
-            rain: {currentItem.RainProbability}%
-          </div>
-          <div className="fs-5 text-muted">
-            Humidity: {currentItem.RelativeHumidity}%
+          <div className="">
+            <div className="text-muted ">
+              Humidity: {currentItem.RelativeHumidity}%
+            </div>
+            <div className="text-muted">
+              {" "}
+              Uv index: {currentItem.UVIndexText}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="column text-end">
-        <div className="fs-3" style={{ textTransform: "capitalize" }}>
-          {locationName}
-        </div>
-        <div className=" fs-5 text-muted">
-          {getDay(currentItem.EpochDateTime * 1000)}
-          {getTimeFromUnix(currentItem.EpochDateTime)}
+      <div className=" homeInfoPart2 ">
+        <div className="locationName">
+          <div className="fs-3" style={{ textTransform: "capitalize" }}>
+            {locationName}
+          </div>
+          <div className=" fs-5 text-muted">
+            {getDay(currentItem.EpochDateTime * 1000)}
+            {getTimeFromUnix(currentItem.EpochDateTime)}
+          </div>
         </div>
         <div className="fs-5 text-muted">
           {currentItem.IconPhrase} , {currentItem.RealFeelTemperature.Phrase}

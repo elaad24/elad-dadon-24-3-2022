@@ -1,5 +1,14 @@
 .chart {
   max-height: 600px !important;
-  max-width: 85% !important;
+  max-width: 100% !important;
   margin: 0 auto;
 }
+
+/* @media screen and (max-width: 321px) {
+  .chart {
+    height: 600px;
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+ */

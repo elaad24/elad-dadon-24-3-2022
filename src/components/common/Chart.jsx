@@ -31,6 +31,7 @@ export default function Chart({ hourWeatherData, matricUnits }) {
     (item) => `${getHouers(item.DateTime)}:00`
   );
 
+  const screenWidth = window.innerWidth;
   const tempacherList = getTempFromData(hourWeatherData, matricUnits);
 
   const axisColor = inDarkMood ? "#fff" : "#666";
@@ -90,7 +91,7 @@ export default function Chart({ hourWeatherData, matricUnits }) {
 
   return (
     <div className="chart">
-      <Line options={options} data={data} />
+      {screenWidth > 400 ? <Line options={options} data={data} /> : ""}
     </div>
   );
 }

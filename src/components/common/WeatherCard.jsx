@@ -8,6 +8,7 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
+import "../../css/weatherGroup.css";
 
 export default function weatherCard({
   item,
@@ -15,53 +16,88 @@ export default function weatherCard({
   matricUnit,
   darkMode,
 }) {
+  const screenWidth = window.innerWidth;
+  const screenSmall = screenWidth <= 450;
+
   const locaitionName = item.Link.split("/")[5];
   const locataionId = item.Link.split("/")[6];
 
   return (
-    <Card
-      className={darkMode ? "bg-dark border" : ""}
-      style={{ width: "14.5rem" }}
-    >
-      <Card.Body className="text-center">
-        <Card.Title>
-          {redirectBtn && (
-            <>
-              <div className="fs-4">
-                <b style={{ textTransform: "capitalize" }}>{locaitionName}</b>
+    <div className={darkMode ? "bg-dark border card" : "card"}>
+      <div className="cardBody">
+        {screenSmall ? (
+          <>
+            <div className="cardTitle">
+              {redirectBtn && <div className="">{locaitionName}</div>}
+              {getDay(item.Date, screenSmall)} ,{getDate(item.Date)}
+              <div className=" cardDescription">{item.Day.IconPhrase}</div>
+            </div>
+            {redirectBtn && (
+              <Link to={`/location/${locataionId}`}>
+                <button className="btn btn-secondary  px-0">see more</button>
+              </Link>
+            )}
+            <p>
+              <div className="cardPart2 text-muted ">
+                <img
+                  className="cardImg"
+                  src={getIconUrl(item.Day.Icon)}
+                  alt=""
+                />
+
+                <div className="cardTemp">
+                  <div>
+                    <b>
+                      {getFahrenheitTemp(
+                        item.Temperature.Maximum.Value,
+                        matricUnit
+                      )}
+                    </b>
+                  </div>
+                  <div>
+                    {" "}
+                    {getFahrenheitTemp(
+                      item.Temperature.Minimum.Value,
+                      matricUnit
+                    )}
+                  </div>
+                </div>
               </div>
-            </>
-          )}
-          {getDay(item.Date)} ,{getDate(item.Date)}
-        </Card.Title>
-        <Card.Subtitle className="my-3  ">
-          <img
-            src={getIconUrl(item.Day.Icon)}
-            width="150px"
-            height="90px"
-            alt=""
-          />
-        </Card.Subtitle>
-        <Card.Text>
-          <div className="mb-2 fs-5">{item.Day.IconPhrase}</div>
-          <div className="d-flex justify-content-around text-muted ">
-            <div>
-              <b>
-                {getFahrenheitTemp(item.Temperature.Maximum.Value, matricUnit)}
-              </b>
+            </p>
+          </>
+        ) : (
+          <>
+            <div className="cardTitle">
+              {redirectBtn && <div className="">{locaitionName}</div>}
+              {getDay(item.Date, screenSmall)} ,{getDate(item.Date)}
             </div>
-            <div>
-              {" "}
-              {getFahrenheitTemp(item.Temperature.Minimum.Value, matricUnit)}
+            <div className="my-3  ">
+              <img className="cardImg" src={getIconUrl(item.Day.Icon)} alt="" />
             </div>
-          </div>
-        </Card.Text>
-        {redirectBtn && (
-          <Link to={`/location/${locataionId}`}>
-            <button className="btn btn-secondary fs-5 px-2">see more</button>
-          </Link>
+            <p>
+              <div className=" cardDescription">{item.Day.IconPhrase}</div>
+              <div className="cardTemp text-muted ">
+                <div>
+                  <b>
+                    {getFahrenheitTemp(
+                      item.Temperature.Maximum.Value,
+                      matricUnit
+                    )}
+                  </b>
+                </div>
+                <div>
+                  {getFahrenheitTemp(
+                    item.Temperature.Minimum.Value,
+                    matricUnit
+                  )}
+                </div>
+              </div>
+            </p>{" "}
+          </>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 }
+
+/*      */

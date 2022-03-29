@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeMode, changeTempUnits } from "../../redux/slices/settingsSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../../css/navbar.css";
 
 export default function SettingsDiv() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
@@ -52,7 +53,7 @@ export default function SettingsDiv() {
   };
 
   return (
-    <div className="d-flex gap-1 align-items-center text-center ">
+    <div className="d-flex gap-1 align-items-center text-center settingsDiv ">
       <div>
         <DarkModeToggle
           onChange={changeLightMode}
@@ -61,11 +62,7 @@ export default function SettingsDiv() {
         />
       </div>
 
-      <button
-        className="btn py-0"
-        style={{ fontSize: "50px" }}
-        onClick={changeUnits}
-      >
+      <button className="btn py-0 tempButton" onClick={changeUnits}>
         <span className={isDarkMode ? "text-light" : "text-dark"}>
           {unitType}&#xb0;
         </span>

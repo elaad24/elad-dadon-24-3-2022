@@ -1,0 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
+.searchBar {
+}
+
+@media screen and (max-width: 321px) {
+}

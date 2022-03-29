@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { autocompleteSearch } from "../../services/appService";
 import { useSelector, useDispatch } from "react-redux";
-
+import "../../css/searchBar.css";
 /* import searchedData from "../../toDelete/mockDataSearchedLocaion";
  */
 export default function SearchBar() {
@@ -45,13 +45,13 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="">
       <form className="d-flex">
         <input
           className={
             inDarkMood
-              ? "form-control me-2 bg-dark text-light"
-              : "form-control me-2"
+              ? "form-control me-2 bg-dark text-light searchBar"
+              : "form-control me-2 searchBar"
           }
           type="search"
           placeholder="Search location"

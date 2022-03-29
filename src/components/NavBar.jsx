@@ -1,4 +1,6 @@
 import React from "react";
+import "../css/navbar.css";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,38 +16,42 @@ export default function NavBar() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
   return (
-    <div className="d-flex align-items-center justify-content-between mb-3 ">
-      <h2 className="">Herolo Weather Task</h2>
-      <div className="">
-        <SearchBar />
+    <div className="navbar ">
+      <div className="responsiveHeader">
+        <h2 className="">Herolo Task</h2>
+        <div className="searchBar">
+          <SearchBar />
+        </div>
       </div>
-      <div className="d-flex">
-        <SettingsDiv />
-      </div>
-      <div className="d-flex gap-4">
-        <Link to="/">
-          <button
-            className={
-              inDarkMood
-                ? "btn btn-outline-warning text-light fs-5"
-                : "btn btn-warning text-light fs-5"
-            }
-          >
-            Home
-          </button>
-        </Link>
+      <div className="responsive">
+        <div className="d-flex">
+          <SettingsDiv />
+        </div>
+        <div className="d-flex gap-3">
+          <Link to="/">
+            <button
+              className={
+                inDarkMood
+                  ? "btn btn-outline-warning text-light buttons"
+                  : "btn btn-warning text-light buttons"
+              }
+            >
+              Home
+            </button>
+          </Link>
 
-        <Link to="/favorites">
-          <button
-            className={
-              inDarkMood
-                ? "btn btn-outline-primary text-light fs-5"
-                : "btn btn-primary text-light fs-5"
-            }
-          >
-            Favorites
-          </button>
-        </Link>
+          <Link to="/favorites">
+            <button
+              className={
+                inDarkMood
+                  ? "btn btn-outline-primary text-light buttons"
+                  : "btn btn-primary text-light buttons"
+              }
+            >
+              Favorites
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

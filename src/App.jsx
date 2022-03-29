@@ -21,9 +21,7 @@ function App() {
   return (
     <div
       className={
-        inDarkMood
-          ? "app container d-flex bg-dark text-light"
-          : "app container d-flex"
+        inDarkMood ? "app container bg-dark text-light" : "app container "
       }
     >
       <NavBar />

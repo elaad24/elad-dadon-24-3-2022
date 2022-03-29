@@ -4,7 +4,7 @@ import {
   removeFromFavourites,
 } from "./redux/slices/favouriteSlice";
 
-export const getDay = (date, type) => {
+export const getDay = (date, short = false) => {
   const weekDays = [
     "Sunday",
     "Monday",
@@ -17,7 +17,7 @@ export const getDay = (date, type) => {
   const weekDaysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const day = new Date(date).getDay();
-  if (type === "short") {
+  if (short) {
     return weekDaysShort[day];
   } else {
     return weekDays[day];
