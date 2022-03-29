@@ -34,7 +34,7 @@
   text-align: end;
 }
 
-@media screen and (max-width: 321px) {
+@media screen and (max-width: 480px) {
   .homeInfo {
     display: flex;
     flex-direction: column-reverse;
@@ -64,5 +64,16 @@
 
   .locationName {
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .homeInfoPart1 {
+    width: 66%;
+    justify-content: space-between;
+  }
+
+  .weatherIcon {
+    width: 250px;
   }
 }

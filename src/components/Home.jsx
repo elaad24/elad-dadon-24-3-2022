@@ -13,7 +13,11 @@ export default function Home() {
 
   return (
     <>
-      <div className={inDarkMood ? "column bg-dark text-light" : "column "}>
+      <div
+        className={
+          inDarkMood ? "column bg-dark text-light mb-3" : "column mb-3 "
+        }
+      >
         <HomeInfo hourWeatherData={hoursweather} matricUnits={isMetric} />
         <Chart hourWeatherData={hoursweather} matricUnits={isMetric} />
         <WeatherGroup fiveDaysForcast={fiveDaysweather.DailyForecasts} />
