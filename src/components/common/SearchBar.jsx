@@ -15,12 +15,16 @@ export default function SearchBar() {
   const [request, setrequest] = useState(0);
 
   const searchLocation = async (txt) => {
-    if (txt.length > 5) {
+    console.log(txt);
+    console.log(txt.length);
+
+    if (txt.length > 3) {
       const inSearched = searchedValues.filter(
         (item) => item.LocalizedName === txt.split(" ")[0]
       );
-      txt = inSearched[0].Key;
+      txt = inSearched[0].LocalizedName;
     }
+
     try {
       const { data } = await autocompleteSearch(txt);
       setSearchedValues([...data]);
@@ -84,9 +88,8 @@ export default function SearchBar() {
           aria-label="Search"
           onChange={(e) => searchFunction(e.target.value)}
           list={"searchBar"}
-          // onBlur={(e) => (e.target.value = "")}
         />
-        <Link to={`/location/${searchedValues[0]?.Key}`}>
+        <Link to={`/elad-dadon-24-3-2022/location/${searchedValues[0]?.Key}`}>
           <button
             className={
               inDarkMood ? "btn btn-success " : "btn btn-outline-success"
