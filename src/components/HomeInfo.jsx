@@ -6,7 +6,8 @@ import {
   getTimeFromUnix,
   getFahrenheitValue,
 } from "../utils";
-import bookmark from "../icons/bookmark.png";
+import heartEmpty from "../icons/heartEmpty.png";
+import heartFull from "../icons/heartFull.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -122,8 +123,17 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
         </div>
         <div className="fs-5 text-muted">
           <button className="btn fs-5 text-muted" onClick={() => likeCombo()}>
-            add to favorits -
-            <img src={bookmark} alt="" width={"40px"} />
+            {liked ? (
+              <>
+                remove from favorits -
+                <img src={heartFull} alt="" width={"40px"} />
+              </>
+            ) : (
+              <>
+                add to favorits -
+                <img src={heartEmpty} alt="" width={"40px"} />
+              </>
+            )}
           </button>
         </div>
       </div>
