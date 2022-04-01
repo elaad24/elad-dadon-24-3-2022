@@ -9,9 +9,7 @@ export default function WeatherGroup({ fiveDaysForcast }) {
   return (
     <div
       className={
-        inDarkMood
-          ? "row h-25 justify-content-between mt-3 bg-dark"
-          : "row  justify-content-between weatherGroup"
+        inDarkMood ? "weatherGroup   mb-3 bg-dark" : "  mb-3  weatherGroup"
       }
     >
       {fiveDaysForcast.map((item) => (

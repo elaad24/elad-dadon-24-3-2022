@@ -18,6 +18,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 function App() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
+
+  if (inDarkMood) {
+    document.getElementsByTagName("BODY")[0].style.backgroundColor = "#212529";
+  } else {
+    document.getElementsByTagName("BODY")[0].style.backgroundColor = "#ffffff";
+  }
   return (
     <div
       className={
@@ -27,10 +33,16 @@ function App() {
       <NavBar />
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/favorites" element={<Favourite />} />
+          <Route path="/elad-dadon-24-3-2022/" element={<Home />} />
+          <Route
+            path="/elad-dadon-24-3-2022/favorites"
+            element={<Favourite />}
+          />
 
-          <Route path="/location/:id" element={<SpecificLocation />} />
+          <Route
+            path="/elad-dadon-24-3-2022/location/:id"
+            element={<SpecificLocation />}
+          />
         </Routes>
       </div>
     </div>
