@@ -28,7 +28,7 @@ export default function NavBar() {
           <SettingsDiv />
         </div>
         <div className="d-flex gap-3">
-          <Link to="/">
+          <Link to="/elad-dadon-24-3-2022/">
             <button
               className={
                 inDarkMood
@@ -40,7 +40,7 @@ export default function NavBar() {
             </button>
           </Link>
 
-          <Link to="/favorites">
+          <Link to="/elad-dadon-24-3-2022/favorites">
             <button
               className={
                 inDarkMood
