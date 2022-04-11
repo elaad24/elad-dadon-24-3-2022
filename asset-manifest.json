@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/elad-dadon-24-3-2022/static/css/main.0797c4fe.css",
-    "main.js": "/elad-dadon-24-3-2022/static/js/main.e9dd589f.js",
+    "main.js": "/elad-dadon-24-3-2022/static/js/main.31457869.js",
     "index.html": "/elad-dadon-24-3-2022/index.html",
     "main.0797c4fe.css.map": "/elad-dadon-24-3-2022/static/css/main.0797c4fe.css.map",
-    "main.e9dd589f.js.map": "/elad-dadon-24-3-2022/static/js/main.e9dd589f.js.map"
+    "main.31457869.js.map": "/elad-dadon-24-3-2022/static/js/main.31457869.js.map"
   },
   "entrypoints": [
     "static/css/main.0797c4fe.css",
-    "static/js/main.e9dd589f.js"
+    "static/js/main.31457869.js"
   ]
 }
