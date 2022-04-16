@@ -71,21 +71,21 @@ export const addOrRemoveFromFavorits = async ({
   name,
   FavoritsFromRedux,
   dispatchFunction,
+  hourWeatherData,
+  fiveDaysForcast,
 }) => {
-  if (FavoritsFromRedux.length === 0) {
-    const { data } = await oneDayForecast(id);
-    const onedayWeater = data;
-    dispatchFunction(addTofavourites({ id, name, onedayWeater }));
-  } else if (FavoritsFromRedux.length !== 0) {
-    const itemInFavourites = FavoritsFromRedux.includes(id);
-    if (itemInFavourites) {
-      console.log(itemInFavourites);
-      dispatchFunction(removeFromFavourites({ id }));
-    } else if (!itemInFavourites) {
-      const { data } = await oneDayForecast(id);
-      const onedayWeater = data;
-      dispatchFunction(addTofavourites({ id, name, onedayWeater }));
-    }
+  const itemInFavourites = FavoritsFromRedux.includes(id);
+  if (itemInFavourites) {
+    dispatchFunction(removeFromFavourites({ id }));
+  } else if (!itemInFavourites) {
+    dispatchFunction(
+      addTofavourites({
+        id,
+        name,
+        hourWeatherData,
+        fiveDaysForcast,
+      })
+    );
   }
 };
 

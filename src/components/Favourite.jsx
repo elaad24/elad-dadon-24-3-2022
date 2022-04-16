@@ -12,7 +12,7 @@ export default function Favourite() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
-
+  console.log(Favourites.likedItems);
   return (
     <>
       <ToastContainer
@@ -31,7 +31,7 @@ export default function Favourite() {
         Favourites.likedItems?.map((item) => (
           <div className="d-flex gap-2">
             <WeatherCard
-              item={item?.onedayWeater.DailyForecasts[0]}
+              item={item?.fiveDaysForcast.DailyForecasts[0]}
               redirectBtn={true}
               matricUnit={isMetric}
               darkMode={inDarkMood}

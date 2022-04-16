@@ -13,13 +13,20 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import "../css/home.css";
 
-export default function HomeInfo({ hourWeatherData, matricUnits }) {
+export default function HomeInfo({
+  hourWeatherData,
+  matricUnits,
+  fiveDaysForcast,
+}) {
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const Favourites = useSelector((state) => state.Favourites);
 
-  const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
+  console.log(hourWeatherData);
+  console.log(fiveDaysForcast);
 
+  const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
+  console.log(currentItem);
   const locationName = currentItem.Link.split("/")[5];
   const locationId = currentItem.Link.split("/")[6];
 
@@ -35,6 +42,8 @@ export default function HomeInfo({ hourWeatherData, matricUnits }) {
       name: locationName,
       FavoritsFromRedux: Favourites.likedIds,
       dispatchFunction: dispatch,
+      hourWeatherData: hourWeatherData,
+      fiveDaysForcast: fiveDaysForcast,
     });
 
     if (liked) {
