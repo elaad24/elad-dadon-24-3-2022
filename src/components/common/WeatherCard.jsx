@@ -33,7 +33,7 @@ export default function weatherCard({
               <div className=" cardDescription">{item.Day.IconPhrase}</div>
             </div>
             {redirectBtn && (
-              <Link to={`/location/${locataionId}`}>
+              <Link to={`/elad-dadon-24-3-2022/location/${locataionId}`}>
                 <button className="btn btn-secondary  px-0">see more</button>
               </Link>
             )}
@@ -94,7 +94,7 @@ export default function weatherCard({
               </div>
             </p>{" "}
             {redirectBtn && (
-              <Link to={`/location/${locataionId}`}>
+              <Link to={`/elad-dadon-24-3-2022/location/${locataionId}`}>
                 <button className="btn btn-secondary  px-1">see more</button>
               </Link>
             )}
