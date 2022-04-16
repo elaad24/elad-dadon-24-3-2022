@@ -22,7 +22,7 @@ export default function SettingsDiv() {
 
     toast.success(`Dark Mode ${prompt} !`, {
       position: "top-right",
-      autoClose: 3500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -43,7 +43,7 @@ export default function SettingsDiv() {
 
     toast.success(`Temperature Units Change To  ${prompt} !`, {
       position: "top-right",
-      autoClose: 3500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

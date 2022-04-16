@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherCard from "./common/WeatherCard";
+import { ToastContainer } from "react-toastify";
 
 import oneDayweather from "../toDelete/mockData1day";
 import NoFavourits from "./common/NoFavourits";
@@ -12,18 +13,34 @@ export default function Favourite() {
 
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
 
-  return favouritesNotEmpty ? (
-    Favourites.likedItems?.map((item) => (
-      <div className="d-flex gap-2">
-        <WeatherCard
-          item={item?.onedayWeater.DailyForecasts[0]}
-          redirectBtn={true}
-          matricUnit={isMetric}
-          darkMode={inDarkMood}
-        />
-      </div>
-    ))
-  ) : (
-    <NoFavourits />
+  return (
+    <>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={1700}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
+      {favouritesNotEmpty ? (
+        Favourites.likedItems?.map((item) => (
+          <div className="d-flex gap-2">
+            <WeatherCard
+              item={item?.onedayWeater.DailyForecasts[0]}
+              redirectBtn={true}
+              matricUnit={isMetric}
+              darkMode={inDarkMood}
+            />
+          </div>
+        ))
+      ) : (
+        <NoFavourits />
+      )}
+    </>
   );
 }

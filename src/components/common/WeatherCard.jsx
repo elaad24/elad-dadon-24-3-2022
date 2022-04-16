@@ -93,6 +93,11 @@ export default function weatherCard({
                 </div>
               </div>
             </p>{" "}
+            {redirectBtn && (
+              <Link to={`/location/${locataionId}`}>
+                <button className="btn btn-secondary  px-1">see more</button>
+              </Link>
+            )}
           </>
         )}
       </div>
