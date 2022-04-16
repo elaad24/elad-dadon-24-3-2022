@@ -14,12 +14,14 @@ export default function Favourite() {
 
   return favouritesNotEmpty ? (
     Favourites.likedItems?.map((item) => (
-      <WeatherCard
-        item={item?.onedayWeater.DailyForecasts[0]}
-        redirectBtn={true}
-        matricUnit={isMetric}
-        darkMode={inDarkMood}
-      />
+      <div className="d-flex gap-2">
+        <WeatherCard
+          item={item?.onedayWeater.DailyForecasts[0]}
+          redirectBtn={true}
+          matricUnit={isMetric}
+          darkMode={inDarkMood}
+        />
+      </div>
     ))
   ) : (
     <NoFavourits />
