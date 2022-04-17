@@ -5,34 +5,28 @@ import { useSelector } from "react-redux";
 import "../../css/searchBar.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { isEnglishLetter } from "../../utils";
+import debounce from "lodash.debounce";
 
 export default function SearchBar() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
-  const [searchedTxt, setSearchedTxt] = useState("");
   const [searchedValues, setSearchedValues] = useState([]);
-  const [inTimeOut, setInTimeOut] = useState(false);
   const [request, setrequest] = useState(0);
 
   const searchLocation = async (txt) => {
     console.log(txt);
     console.log(txt.length);
 
-    if (txt.length > 3) {
-      const inSearched = searchedValues.filter(
-        (item) => item.LocalizedName === txt.split(" ")[0]
-      );
-      txt = inSearched[0].LocalizedName;
-    }
-
     try {
+      console.log("auto complite run ");
       const { data } = await autocompleteSearch(txt);
       setSearchedValues([...data]);
     } catch (e) {
       if (e.response.status === 400) {
         toast.error("error - bad request ", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -42,7 +36,7 @@ export default function SearchBar() {
       } else if (e.response.status > 210) {
         toast.warn("error - most probably run out of api credit ", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 3500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -55,22 +49,13 @@ export default function SearchBar() {
     setrequest(request + 1);
   };
 
-  const delaySearch = (txt) => {
-    setInTimeOut(true);
-    setTimeout(() => {
-      setInTimeOut(false);
-      searchLocation(txt);
-    }, 750);
-  };
+  const debouncedFetchData = debounce((TXT) => {
+    searchLocation(TXT);
+  }, 334);
 
   const searchFunction = (txt) => {
-    setSearchedTxt(txt);
-    if (txt.length === 1) {
-      searchLocation(txt);
-    } else if (txt.length > 1) {
-      if (!inTimeOut) {
-        delaySearch(txt);
-      }
+    if (isEnglishLetter(txt)) {
+      debouncedFetchData(txt);
     }
   };
 
