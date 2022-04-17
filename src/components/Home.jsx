@@ -28,16 +28,12 @@ export default function Home() {
     savedWeatherData = Favourites.likedItems.filter(
       (weatherItem) => weatherItem.id == locationId
     );
-    console.log(savedWeatherData);
   });
 
   useEffect(async () => {
-    console.log("savedWeather", savedWeather);
     if (!savedWeather) {
-      console.log("started and favourits ==", Favourites);
       try {
         const { data } = await hourlyForecast(locationId);
-        console.log(data);
         setHourlyWeather(data);
       } catch (e) {
         if (e.response.status == 400) {
@@ -63,9 +59,7 @@ export default function Home() {
         }
       }
     } else {
-      console.log(savedWeatherData);
       setHourlyWeather(savedWeatherData[0].hourWeatherData);
-      console.log("hourWeatherData added from redux ");
     }
   }, []);
 
@@ -99,8 +93,6 @@ export default function Home() {
       }
     } else {
       setFiveDayWeather(savedWeatherData[0].fiveDaysForcast);
-
-      console.log("five day weather added from redux ");
     }
   }, []);
 

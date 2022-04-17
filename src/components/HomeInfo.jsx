@@ -22,11 +22,8 @@ export default function HomeInfo({
   const [liked, setLiked] = useState(false);
   const Favourites = useSelector((state) => state.Favourites);
 
-  console.log(hourWeatherData);
-  console.log(fiveDaysForcast);
-
   const [currentItem, setCurrentItem] = useState(hourWeatherData[0]);
-  console.log(currentItem);
+
   const locationName = currentItem.Link.split("/")[5];
   const locationId = currentItem.Link.split("/")[6];
 

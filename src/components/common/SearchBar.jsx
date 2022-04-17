@@ -15,11 +15,7 @@ export default function SearchBar() {
   const [request, setrequest] = useState(0);
 
   const searchLocation = async (txt) => {
-    console.log(txt);
-    console.log(txt.length);
-
     try {
-      console.log("auto complite run ");
       const { data } = await autocompleteSearch(txt);
       setSearchedValues([...data]);
     } catch (e) {

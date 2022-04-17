@@ -12,7 +12,6 @@ export default function Favourite() {
   const inDarkMood = useSelector((state) => state.Settings.darkMode);
 
   const favouritesNotEmpty = Favourites.likedIds?.length > 0;
-  console.log(Favourites.likedItems);
   return (
     <>
       <ToastContainer

@@ -29,7 +29,6 @@ export default function SpecificLocation() {
     savedWeatherData = Favourites.likedItems.filter(
       (weatherItem) => weatherItem.id == locationId
     );
-    console.log(savedWeatherData);
   });
 
   useEffect(async () => {
@@ -61,9 +60,7 @@ export default function SpecificLocation() {
         }
       }
     } else {
-      console.log(savedWeatherData);
       setHourlyWeather(savedWeatherData[0].hourWeatherData);
-      console.log("hourWeatherData added from redux ");
     }
   }, []);
 
@@ -97,8 +94,6 @@ export default function SpecificLocation() {
       }
     } else {
       setFiveDayWeather(savedWeatherData[0].fiveDaysForcast);
-
-      console.log("five day weather added from redux ");
     }
   }, []);
 
