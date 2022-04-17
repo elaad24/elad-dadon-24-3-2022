@@ -27,16 +27,16 @@ export default function Favourite() {
       />
 
       {favouritesNotEmpty ? (
-        Favourites.likedItems?.map((item) => (
-          <div className="d-flex gap-2">
+        <div className="d-flex gap-2">
+          {Favourites.likedItems?.map((item) => (
             <WeatherCard
               item={item?.fiveDaysForcast.DailyForecasts[0]}
               redirectBtn={true}
               matricUnit={isMetric}
               darkMode={inDarkMood}
             />
-          </div>
-        ))
+          ))}
+        </div>
       ) : (
         <NoFavourits />
       )}

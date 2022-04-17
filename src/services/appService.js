@@ -1,6 +1,8 @@
 import http from "./http";
 import apiUrl from "../config.json";
-const apikey = "8H4llAfkBj2rYOQtwfYk9oSXWATC8Q4V";
+/* const apikey = "8H4llAfkBj2rYOQtwfYk9oSXWATC8Q4V";
+ */
+const apikey = "UKpjmRddsUSGtOhUGlrZNaSNLe3mTiNe";
 
 export function oneDayForecast(locationID) {
   return http.get(`${apiUrl}forecasts/v1/daily/1day/${locationID}?apikey=${apikey}&details=true&metric=true
